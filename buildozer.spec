@@ -3,9 +3,9 @@ title = connector
 package.name = connector
 package.domain = com.connector
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,ttf,json
+#source.include_exts = py,png,jpg,kv,atlas,ttf,json
 version = 0.1
-requirements = kivy==master,python3crystax==3.5
+requirements = python3,kivy
 orientation = all
 osx.python_version = 3
 osx.kivy_version = 1.9.1
