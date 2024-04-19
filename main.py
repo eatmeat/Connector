@@ -96,55 +96,56 @@ def _onKeyRelease(event):
     if event.keycode==67 and  ctrl and event.keysym.lower() != "c":
         event.widget.event_generate("<<Copy>>")
 
-logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG, filename="main.log")
-logging.info("Hello world!")
-logging.getLogger().setLevel(logging.DEBUG)
-logging.warning(f"Logger for DEBUG is running!")
+if __name__ == '__main__':
+    logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG, filename="main.log")
+    logging.info("Hello world!")
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.warning(f"Logger for DEBUG is running!")
 
-Protocol.data_load()
+    Protocol.data_load()
 
-root = Tk()
-root.title("Connector")
-root.bind_all("<Key>", _onKeyRelease, "+")
-root.protocol("WM_DELETE_WINDOW", root_onClosing)
-root.after_idle(loop)
+    root = Tk()
+    root.title("Connector")
+    root.bind_all("<Key>", _onKeyRelease, "+")
+    root.protocol("WM_DELETE_WINDOW", root_onClosing)
+    root.after_idle(loop)
 
-lblInfo = Label(root)
-lblInfo.place(relwidth=1, relheight=0.1)
+    lblInfo = Label(root)
+    lblInfo.place(relwidth=1, relheight=0.1)
 
-frameTop = Frame(root)
-frameTop.place(rely=0.1 ,relwidth=1, relheight=0.2) 
+    frameTop = Frame(root)
+    frameTop.place(rely=0.1 ,relwidth=1, relheight=0.2) 
 
-lblYourNumber = Label(frameTop, text='Твой номер:')
-lblYourNumber.place(relwidth=0.4, relheight=0.5)
+    lblYourNumber = Label(frameTop, text='Твой номер:')
+    lblYourNumber.place(relwidth=0.4, relheight=0.5)
 
-inputYourNumber = Entry(frameTop)
-inputYourNumber.place(relx=0.4, relwidth=0.4, relheight=0.5)
+    inputYourNumber = Entry(frameTop)
+    inputYourNumber.place(relx=0.4, relwidth=0.4, relheight=0.5)
 
-btnNewNumber = Button(frameTop, text='*', command=btn_NewNumber)
-btnNewNumber.place(relx=0.8, relwidth=0.2, relheight=0.5)
+    btnNewNumber = Button(frameTop, text='*', command=btn_NewNumber)
+    btnNewNumber.place(relx=0.8, relwidth=0.2, relheight=0.5)
 
-inputPeerNumber = Entry(frameTop)
-inputPeerNumber.place(rely=0.5, relwidth=0.8, relheight=0.5)
+    inputPeerNumber = Entry(frameTop)
+    inputPeerNumber.place(rely=0.5, relwidth=0.8, relheight=0.5)
 
-btnConnect = Button(frameTop, text='Подкл.', command=btn_Connect)
-btnConnect.place(rely=0.5, relx=0.8, relwidth=0.2, relheight=0.5)
+    btnConnect = Button(frameTop, text='Подкл.', command=btn_Connect)
+    btnConnect.place(rely=0.5, relx=0.8, relwidth=0.2, relheight=0.5)
 
-frameCentr = Frame(root)
-frameCentr.place(rely=0.3, relwidth=1, relheight=0.6)
+    frameCentr = Frame(root)
+    frameCentr.place(rely=0.3, relwidth=1, relheight=0.6)
 
-lblChat = Label(frameCentr, bg='red', anchor="nw", justify="left", font=("Courier New", 10))
-lblChat.place(relheight=1, relwidth=1)
+    lblChat = Label(frameCentr, bg='red', anchor="nw", justify="left", font=("Courier New", 10))
+    lblChat.place(relheight=1, relwidth=1)
 
-frameBottom = Frame(root)
-frameBottom.place(rely=0.9, relwidth=1, relheight=0.1)
+    frameBottom = Frame(root)
+    frameBottom.place(rely=0.9, relwidth=1, relheight=0.1)
 
-inputMessage = Entry(frameBottom)
-inputMessage.place(relwidth=0.8, relheight=1)
+    inputMessage = Entry(frameBottom)
+    inputMessage.place(relwidth=0.8, relheight=1)
 
-btnMessage = Button(frameBottom, text='Отпр.', command=btn_Message)
-btnMessage.place(relx=0.8, relwidth=0.2, relheight=1)
+    btnMessage = Button(frameBottom, text='Отпр.', command=btn_Message)
+    btnMessage.place(relx=0.8, relwidth=0.2, relheight=1)
 
-btn_NewNumber()
+    btn_NewNumber()
 
-root.mainloop()
+    root.mainloop()
