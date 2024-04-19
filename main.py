@@ -127,7 +127,7 @@ btnNewNumber.place(relx=0.8, relwidth=0.2, relheight=0.5)
 inputPeerNumber = Entry(frameTop)
 inputPeerNumber.place(rely=0.5, relwidth=0.8, relheight=0.5)
 
-btnConnect = Button(frameTop, text='Con', command=btn_Connect)
+btnConnect = Button(frameTop, text='Подкл.', command=btn_Connect)
 btnConnect.place(rely=0.5, relx=0.8, relwidth=0.2, relheight=0.5)
 
 frameCentr = Frame(root)
@@ -142,7 +142,7 @@ frameBottom.place(rely=0.9, relwidth=1, relheight=0.1)
 inputMessage = Entry(frameBottom)
 inputMessage.place(relwidth=0.8, relheight=1)
 
-btnMessage = Button(frameBottom, text='Send', command=btn_Message)
+btnMessage = Button(frameBottom, text='Отпр.', command=btn_Message)
 btnMessage.place(relx=0.8, relwidth=0.2, relheight=1)
 
 btn_NewNumber()
