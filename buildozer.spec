@@ -3,13 +3,13 @@ title = connector
 package.name = connector
 package.domain = com.connector
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,ttf,json,log
+source.include_exts = py,png,jpg,kv,atlas,ttf,json
 version = 0.1
 requirements = kivy==master,python3crystax==3.5
 orientation = all
 osx.python_version = 3
 osx.kivy_version = 1.9.1
-fullscreen = 0
+fullscreen = 1
 #android.presplash_color = #1d3b3e
 android.permissions = WRITE_EXTERNAL_STORAGE
 android.api = 19
