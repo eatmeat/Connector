@@ -117,10 +117,10 @@ if __name__ == '__main__':
     frameTop.place(rely=0.1 ,relwidth=1, relheight=0.2) 
 
     lblYourNumber = Label(frameTop, text='Твой номер:')
-    lblYourNumber.place(relwidth=0.4, relheight=0.5)
+    lblYourNumber.place(relwidth=0.3, relheight=0.5)
 
     inputYourNumber = Entry(frameTop, font=("Courier New", 10))
-    inputYourNumber.place(relx=0.4, relwidth=0.4, relheight=0.5)
+    inputYourNumber.place(relx=0.3, relwidth=0.5, relheight=0.5)
 
     btnNewNumber = Button(frameTop, text='*', command=btn_NewNumber)
     btnNewNumber.place(relx=0.8, relwidth=0.2, relheight=0.5)
