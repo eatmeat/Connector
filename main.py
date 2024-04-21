@@ -119,13 +119,13 @@ if __name__ == '__main__':
     lblYourNumber = Label(frameTop, text='Твой номер:')
     lblYourNumber.place(relwidth=0.4, relheight=0.5)
 
-    inputYourNumber = Entry(frameTop)
+    inputYourNumber = Entry(frameTop, font=("Courier New", 10))
     inputYourNumber.place(relx=0.4, relwidth=0.4, relheight=0.5)
 
     btnNewNumber = Button(frameTop, text='*', command=btn_NewNumber)
     btnNewNumber.place(relx=0.8, relwidth=0.2, relheight=0.5)
 
-    inputPeerNumber = Entry(frameTop)
+    inputPeerNumber = Entry(frameTop, font=("Courier New", 10))
     inputPeerNumber.place(rely=0.5, relwidth=0.8, relheight=0.5)
 
     btnConnect = Button(frameTop, text='Подкл.', command=btn_Connect)
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     frameCentr = Frame(root)
     frameCentr.place(rely=0.3, relwidth=1, relheight=0.6)
 
-    lblChat = Label(frameCentr, bg='red', anchor="nw", justify="left", font=("Courier New", 10))
+    lblChat = Label(frameCentr, bg='red', anchor="nw", justify="left", font=("Courier New", 8))
     lblChat.place(relheight=1, relwidth=1)
 
     frameBottom = Frame(root)
