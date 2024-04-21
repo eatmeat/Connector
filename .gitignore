@@ -1,2 +1,5 @@
 chat-savefile.json
 main.log
+__pycache__
+.buildozer
+bin
