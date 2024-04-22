@@ -1,23 +1,38 @@
-#from tkinter import *
 from kivy.app import App
-from kivy.animation import Animation
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.scrollview import ScrollView
+from kivy.properties import StringProperty
 from kivy.core.window import Window
 from kivy.clock import Clock
+import os
+import pwd
 
 import socket
 import logging
 from datetime import datetime
 
 from app.classes import Protocol
+from kivy.lang import Builder
 
 # Глобальные настройки
 Window.size = (500, 700)
 Window.clearcolor = (0/255, 0/255, 0/255, 1)
 Window.title = "Connector"
+
+Builder.load_string('''
+<ScrollableLabel>:
+    Label:
+        size_hint_y: None
+        height: self.texture_size[1]
+        text_size: self.width, None
+        text: root.text
+''')
+
+class ScrollableLabel(ScrollView):
+    text = StringProperty('')
 
 class ConnectorApp(App):
     
@@ -25,10 +40,11 @@ class ConnectorApp(App):
         super().__init__()
         self.lblInfo = Label()
         self.inputYourNumber = TextInput(hint_text='Твой номер:', multiline=False)
-        self.inputPeerNumber = TextInput(hint_text='Hомер второго:', multiline=False) 
+        self.inputPeerNumber = TextInput(hint_text='Hомер пира:', multiline=False) 
         self.inputMessage = TextInput(hint_text='Сообщение:', multiline=False) 
-        self.lblChat = Label()
+        self.lblChat = ScrollableLabel()
         self.s = 0
+        self.userName = pwd.getpwuid(os.getuid())[0]
 
     def addr2int(self, ip, port: int):
         binport = bin(port)[2:].rjust(16, "0")
@@ -44,7 +60,7 @@ class ConnectorApp(App):
         ]
         return ".".join(num[0:4]), int(num[4])
 
-    def tree2str(self, tree, indent_width=4):
+    def tree2str(self, tree):
         def _tree2str(start, parent, tree, grandpa=None, indent=""):
             outstr = ""
             if parent != start:
@@ -55,18 +71,18 @@ class ConnectorApp(App):
             if parent not in tree:
                 return outstr
             for child in tree[parent][:-1]:
-                outstr += indent + "├" + "─" * indent_width
-                outstr += _tree2str(start, child, tree, parent, indent + "│" + " " * 4)
+                outstr += indent + ">" 
+                outstr += _tree2str(start, child, tree, parent, indent + "│")
         
             child = tree[parent][-1]
-            outstr += indent + "└" + "─" * indent_width
-            outstr += _tree2str(start, child, tree, parent, indent + " " * 5) + "\n"  # 4 -> 5
+            outstr += indent + ">" 
+            outstr += _tree2str(start, child, tree, parent, indent + ">") + "\n"
         
             return outstr
     
-        outstr = "00000000: Root"
+        outstr = "Root"
         parent = outstr
-        outstr += "\n" + _tree2str(outstr, parent, tree)        
+        outstr = _tree2str(outstr, parent, tree)        
         return outstr
     
     def updateForm(self, *args):
@@ -96,12 +112,16 @@ class ConnectorApp(App):
             self.s.make_connection(i, p)
             Protocol.sessions.append(self.s)
             self.s.backlife_cycle(1)
+            self.inputPeerNumber.text = ""
             self.updateForm()
     
     def btnSendOnClick(self, *args):
         if self.inputMessage.text != "" :
-            Protocol.data_add(self.inputMessage.text) 
+            now = datetime.now()
+            current_time = now.strftime("%H:%M:%S")
+            Protocol.data_add(f"[{current_time}] {self.userName}: {self.inputMessage.text}") 
             self.updateForm()
+            self.inputMessage.text = ""
 
     def build(self):
         self.btnNewNumberOnClick()
@@ -124,8 +144,8 @@ class ConnectorApp(App):
         boxPeerNumber.add_widget(self.inputPeerNumber)
         boxPeerNumber.add_widget(btnConnect)
 
-        boxChat = BoxLayout()
-        boxChat.add_widget(self.lblChat)
+        #boxChat = BoxLayout()
+        #boxChat.add_widget(self.lblChat)
         
         boxSendMessage = BoxLayout()
         boxSendMessage.add_widget(self.inputMessage)
@@ -135,7 +155,7 @@ class ConnectorApp(App):
         box.add_widget(self.lblInfo)
         box.add_widget(boxYourNumber)
         box.add_widget(boxPeerNumber)
-        box.add_widget(boxChat)
+        box.add_widget(self.lblChat)
         box.add_widget(boxSendMessage)
 
         Clock.schedule_interval(self.updateForm, 1)

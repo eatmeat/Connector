@@ -51,8 +51,8 @@ def get_tree():
     dct = {}
 
     for key, message in data.items():
-        if key + ": " + message not in dct:
-            dct.update({key + ": " + message: []})
+        if message not in dct:
+            dct.update({message: []})
 
     for key, message in data.items():
         rep = [i[1:] for i in re.findall("@+[a-z0-9]{8}", message)]
@@ -64,13 +64,13 @@ def get_tree():
 
         if rep not in data:
             rep = "ffffffff"
-        if rep + ": " + data[rep] in dct:
-            dct[rep + ": " + data[rep]].append(key + ": " + message)
+        if data[rep] in dct:
+            dct[data[rep]].append(message)
         else:
             pass
             # dct.update({rep+": "+data[rep]:[key+": "+message]})
     # print(dct)
-    dct["00000000: Root"].remove("00000000: Root")
+    dct["Root"].remove("Root")
     for k, v in list(dct.items()).copy():
         if v == []:
             dct.pop(k)
