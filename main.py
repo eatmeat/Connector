@@ -148,13 +148,13 @@ class ConnectorApp(App):
         boxSendMessage.add_widget(self.inputMessage)
         boxSendMessage.add_widget(btnSend)
 
-        box = GridLayout(cols = 1)
+        box = GridLayout(cols = 1, row_force_default=True, row_default_height=30)
         box.add_widget(self.lblInfo)
         box.add_widget(boxYourNumber)
         box.add_widget(boxPeerNumber)
         box.add_widget(self.lblChat)
         box.add_widget(boxSendMessage)
-        box.rows_minimum = {0:50, 1:25, 2:25, 3:400, 4:25}
+        box.rows_minimum = {0:50, 1:30, 2:30, 3:600, 4:30}
         Clock.schedule_interval(self.updateForm, 1)
         return box
 
