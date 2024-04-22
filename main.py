@@ -134,27 +134,30 @@ class ConnectorApp(App):
 
         btnSend = Button(text = 'Send')
         btnSend.bind(on_press=self.btnSendOnClick)
+        
+        boxInfo = BoxLayout(size_hint_y = 0.1)
+        boxYourNumber = BoxLayout(size_hint_y = 0.065)
+        boxPeerNumber = BoxLayout(size_hint_y = 0.065)
+        boxChat = BoxLayout()
+        boxSendMessage = BoxLayout(size_hint_y = 0.065)
 
-        boxYourNumber = BoxLayout()
+        boxInfo.add_widget(self.lblInfo)
         boxYourNumber.add_widget(Label(text = 'Твой номер:'))
         boxYourNumber.add_widget(self.inputYourNumber)
         boxYourNumber.add_widget(btnNewNumber)
-
-        boxPeerNumber = BoxLayout()
         boxPeerNumber.add_widget(self.inputPeerNumber)
         boxPeerNumber.add_widget(btnConnect)
-
-        boxSendMessage = BoxLayout()
+        boxChat.add_widget(self.lblChat)
         boxSendMessage.add_widget(self.inputMessage)
         boxSendMessage.add_widget(btnSend)
 
-        box = GridLayout(cols = 1, row_force_default=True, row_default_height=30)
-        box.add_widget(self.lblInfo)
+        box = GridLayout(cols = 1)
+        box.add_widget(boxInfo)
         box.add_widget(boxYourNumber)
         box.add_widget(boxPeerNumber)
-        box.add_widget(self.lblChat)
+        box.add_widget(boxChat)
         box.add_widget(boxSendMessage)
-        box.rows_minimum = {0:50, 1:30, 2:30, 3:600, 4:30}
+
         Clock.schedule_interval(self.updateForm, 1)
         return box
 
