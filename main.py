@@ -117,6 +117,7 @@ if __name__ == '__main__':
 
     Protocol.data_load()
 
+    d = 1
 #    root = Tk()
 #    root.title("Connector")
 #    root.bind_all("<Key>", _onKeyRelease, "+")
