@@ -18,7 +18,6 @@ from app.classes import Protocol
 from kivy.lang import Builder
 
 # Глобальные настройки
-Window.size = (500, 700)
 Window.clearcolor = (0/255, 0/255, 0/255, 1)
 Window.title = "Connector"
 
