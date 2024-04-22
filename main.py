@@ -51,7 +51,7 @@ class ConnectorApp(App):
         binip = "".join([bin(int(i))[2:].rjust(8, "0") for i in ip.split(".")])
         return int(binip + binport, 2)
 
-    def int2addr(num):
+    def int2addr(self, num):
         num = bin(num)[2:].rjust(48, "0")
         print(num)
         num = [
