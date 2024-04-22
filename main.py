@@ -93,7 +93,7 @@ class ConnectorApp(App):
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
 
-            self.lblInfo.text = f"Локальный IP: {socket.gethostbyname(socket.gethostname())} Внешний IP: {self.s.getPublic_ip()} \n Соединений: {len(Protocol.getSessions())} Время: {current_time}"
+            self.lblInfo.text = f"Локальный IP: {socket.gethostbyname(socket.gethostname())} Внешний IP: {self.s.getPublic_ip()} \nСоединений: {len(Protocol.getSessions())} Время: {current_time}"
             self.inputYourNumber.text = f"{self.addr2int(self.s.public_ip,int(self.s.public_port))}"
         self.lblChat.text = self.tree2str(Protocol.get_tree())
     
