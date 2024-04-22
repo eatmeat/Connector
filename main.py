@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty
@@ -27,7 +28,7 @@ Builder.load_string('''
         size_hint_y: None
         height: self.texture_size[1]
         text_size: self.width, None
-        text: root.text
+        text: root.text                   
 ''')
 
 class ScrollableLabel(ScrollView):
@@ -38,9 +39,9 @@ class ConnectorApp(App):
     def __init__(self):
         super().__init__()
         self.lblInfo = Label()
-        self.inputYourNumber = TextInput(hint_text='Твой номер:', multiline=False)
-        self.inputPeerNumber = TextInput(hint_text='Hомер пира:', multiline=False) 
-        self.inputMessage = TextInput(hint_text='Сообщение:', multiline=False) 
+        self.inputYourNumber = TextInput(hint_text = 'Твой номер:', multiline = False)
+        self.inputPeerNumber = TextInput(hint_text = 'Hомер пира:', multiline = False) 
+        self.inputMessage = TextInput(hint_text = 'Сообщение:', multiline = False) 
         self.lblChat = ScrollableLabel()
         self.s = 0
         self.userName = pwd.getpwuid(os.getuid())[0]
@@ -125,17 +126,17 @@ class ConnectorApp(App):
     def build(self):
         self.btnNewNumberOnClick()
         
-        btnNewNumber = Button(text='*')
+        btnNewNumber = Button(text = '*')
         btnNewNumber.bind(on_press=self.btnNewNumberOnClick)
 
-        btnConnect = Button(text='Con')
+        btnConnect = Button(text = 'Con')
         btnConnect.bind(on_press=self.btnConnectOnClick)
 
-        btnSend = Button(text='Send')
+        btnSend = Button(text = 'Send')
         btnSend.bind(on_press=self.btnSendOnClick)
 
         boxYourNumber = BoxLayout()
-        boxYourNumber.add_widget(Label(text='Твой номер:'))
+        boxYourNumber.add_widget(Label(text = 'Твой номер:'))
         boxYourNumber.add_widget(self.inputYourNumber)
         boxYourNumber.add_widget(btnNewNumber)
 
@@ -143,20 +144,17 @@ class ConnectorApp(App):
         boxPeerNumber.add_widget(self.inputPeerNumber)
         boxPeerNumber.add_widget(btnConnect)
 
-        #boxChat = BoxLayout()
-        #boxChat.add_widget(self.lblChat)
-        
         boxSendMessage = BoxLayout()
         boxSendMessage.add_widget(self.inputMessage)
         boxSendMessage.add_widget(btnSend)
 
-        box = BoxLayout(orientation='vertical')
+        box = GridLayout(cols = 1)
         box.add_widget(self.lblInfo)
         box.add_widget(boxYourNumber)
         box.add_widget(boxPeerNumber)
         box.add_widget(self.lblChat)
         box.add_widget(boxSendMessage)
-
+        box.rows_minimum = {0:50, 1:25, 2:25, 3:400, 4:25}
         Clock.schedule_interval(self.updateForm, 1)
         return box
 
