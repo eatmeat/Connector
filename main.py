@@ -140,13 +140,6 @@ class ConnectorApp(App):
 
         Clock.schedule_interval(self.updateForm, 1)
         return box
-#  
-#    root.protocol("WM_DELETE_WINDOW", root_onClosing)
-#    root.after_idle(loop)
-
-#def loop():
-#    updateForm()
-#    root.after(500, loop)
 
 if __name__ == '__main__':
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG, filename="main.log")
