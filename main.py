@@ -158,7 +158,7 @@ class ConnectorApp(App):
         box.add_widget(boxChat)
         box.add_widget(boxSendMessage)
 
-        Clock.schedule_interval(self.updateForm, 1)
+        Clock.schedule_interval(self.updateForm, 1/24)
         return box
 
 if __name__ == '__main__':
