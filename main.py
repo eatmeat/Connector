@@ -146,11 +146,11 @@ class ConnectorApp(App):
         btnSend = Button(text = '>')
         btnSend.bind(on_press=self.btnSendOnClick)
         
-        boxInfo = BoxLayout(size_hint_y = 0.15)
-        boxYourNumber = BoxLayout(size_hint_y = 0.15)
-        boxPeerNumber = BoxLayout(size_hint_y = 0.15)
+        boxInfo = BoxLayout(size_hint_y = 0.1)
+        boxYourNumber = BoxLayout(size_hint_y = 0.1)
+        boxPeerNumber = BoxLayout(size_hint_y = 0.1)
         boxChat = BoxLayout()
-        boxSendMessage = BoxLayout(size_hint_y = 0.15)
+        boxSendMessage = BoxLayout(size_hint_y = 0.1)
 
         boxInfo.add_widget(self.inputLocalIP)
         boxInfo.add_widget(self.inputPublicIP)
