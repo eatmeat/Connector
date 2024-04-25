@@ -1,53 +1,53 @@
-from kivymd.app import MDApp
-from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDRectangleFlatButton
-
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.gridlayout import MDGridLayout
-
-from kivymd.uix.scrollview import MDScrollView
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty
 from kivy.core.window import Window
 from kivy.clock import Clock
+from app.classes import Protocol
+from kivy.lang import Builder
+from datetime import datetime
 import os
 import pwd
 
 import socket
 import logging
-from datetime import datetime
 
-from app.classes import Protocol
-from kivy.lang import Builder
+
+
 
 # Глобальные настройки
 Window.clearcolor = (0/255, 0/255, 0/255, 1)
 Window.title = "Connector"
 
 Builder.load_string('''
-<MDScrollableLabel>:
-    MDLabel:
+<ScrollableLabel>:
+    Label:
         size_hint_y: None
         height: self.texture_size[1]
         text_size: self.width, None
         text: root.text                   
 ''')
 
-class MDScrollableLabel(MDScrollView):
+class ScrollableLabel(ScrollView):
     text = StringProperty('')
 
-class ConnectorApp(MDApp):
+class ConnectorApp(App):
     
     def __init__(self):
         super().__init__()
-        self.inputLocalIP = MDTextField(hint_text = 'Локальный IP:', multiline = False)
-        self.inputPublicIP = MDTextField(hint_text = 'Публичный IP:', multiline = False)
-        self.inputConnectioCount = MDTextField(hint_text = 'Соединений:', multiline = False)
-        self.inputTime = MDTextField(hint_text = 'Время:', multiline = False)
-        self.inputYourNumber = MDTextField(hint_text = 'Твой номер:', multiline = False) 
-        self.inputPeerNumber = MDTextField(hint_text = 'Hомер пира:', multiline = False) 
-        self.inputMessage = MDTextField(hint_text = 'Сообщение:', multiline = False) 
-        self.lblChat = MDScrollableLabel()
+        self.inputLocalIP = TextInput(hint_text = 'Локальный IP:', multiline = False)
+        self.inputPublicIP = TextInput(hint_text = 'Публичный IP:', multiline = False)
+        self.inputConnectioCount = TextInput(hint_text = 'Соединений:', multiline = False)
+        self.inputTime = TextInput(hint_text = 'Время:', multiline = False)
+        self.inputYourNumber = TextInput(hint_text = 'Твой номер:', multiline = False) 
+        self.inputPeerNumber = TextInput(hint_text = 'Hомер пира:', multiline = False) 
+        self.inputMessage = TextInput(hint_text = 'Сообщение:', multiline = False) 
+        self.lblChat = ScrollableLabel()
         self.s = 0
         self.userName = pwd.getpwuid(os.getuid())[0]
 
@@ -139,20 +139,20 @@ class ConnectorApp(MDApp):
     def build(self):
         self.btnNewNumberOnClick()
         
-        btnNewNumber = MDRectangleFlatButton(text = '*')
+        btnNewNumber = Button(text = '*')
         btnNewNumber.bind(on_press=self.btnNewNumberOnClick)
 
-        btnConnect = MDRectangleFlatButton(text = 'Con')
+        btnConnect = Button(text = 'Con')
         btnConnect.bind(on_press=self.btnConnectOnClick)
 
-        btnSend = MDRectangleFlatButton(text = '>')
+        btnSend = Button(text = '>')
         btnSend.bind(on_press=self.btnSendOnClick)
         
-        boxInfo = MDBoxLayout(size_hint_y = 0.15)
-        boxYourNumber = MDBoxLayout(size_hint_y = 0.15)
-        boxPeerNumber = MDBoxLayout(size_hint_y = 0.15)
-        boxChat = MDBoxLayout()
-        boxSendMessage = MDBoxLayout(size_hint_y = 0.15)
+        boxInfo = BoxLayout(size_hint_y = 0.15)
+        boxYourNumber = BoxLayout(size_hint_y = 0.15)
+        boxPeerNumber = BoxLayout(size_hint_y = 0.15)
+        boxChat = BoxLayout()
+        boxSendMessage = BoxLayout(size_hint_y = 0.15)
 
         boxInfo.add_widget(self.inputLocalIP)
         boxInfo.add_widget(self.inputPublicIP)
@@ -166,7 +166,7 @@ class ConnectorApp(MDApp):
         boxSendMessage.add_widget(self.inputMessage)
         boxSendMessage.add_widget(btnSend)
 
-        box = MDGridLayout(cols = 1)
+        box = GridLayout(cols = 1)
         box.add_widget(boxInfo)
         box.add_widget(boxYourNumber)
         box.add_widget(boxPeerNumber)
