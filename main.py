@@ -96,9 +96,7 @@ class ConnectorApp(App):
             self.inputPublicIP.text = "none"
             self.inputConnectioCount.text = "none"
             self.inputYourNumber.text = "none"
-        
         else :    
-            
             self.inputLocalIP.text = socket.gethostbyname(socket.gethostname())
             self.inputPublicIP.text = self.s.getPublic_ip()
             self.inputConnectioCount.text = f"{len(Protocol.getSessions())}"
@@ -107,7 +105,7 @@ class ConnectorApp(App):
         self.lblChat.text = self.tree2str(Protocol.get_tree())
         
         now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")
+        current_time = now.strftime("%H:%M:%S.%f")
         self.inputTime.text = current_time
     
     def btnNewNumberOnClick(self, *args):
@@ -173,7 +171,7 @@ class ConnectorApp(App):
         box.add_widget(boxChat)
         box.add_widget(boxSendMessage)
 
-        Clock.schedule_interval(self.updateForm, 1/24)
+        Clock.schedule_interval(self.updateForm, 1/60)
         return box
 
 if __name__ == '__main__':
