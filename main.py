@@ -17,6 +17,8 @@ import pwd
 import socket
 import logging
 
+#это комментарий из ubuntu
+
 # Глобальные настройки
 Window.clearcolor = (0/255, 0/255, 0/255, 1)
 Window.title = "Connector"
